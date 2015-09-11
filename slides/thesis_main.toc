@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.24pt}
+\select@language {english}
+\beamer@sectionintoc {1}{Overview}{4}{0}{1}
+\beamer@subsectionintoc {1}{1}{Observability of Visual-Inertial Navigation}{4}{0}{1}
+\beamer@subsectionintoc {1}{2}{Scene Segmentation by Aggregation of Global Ordering Constraints}{9}{0}{1}
+\beamer@subsectionintoc {1}{3}{Desiging Agents with Task-Specific Minimal Representation}{13}{0}{1}
+\beamer@sectionintoc {2}{Featured Chapter: Information-Driven Autonomous Exploration}{26}{0}{2}

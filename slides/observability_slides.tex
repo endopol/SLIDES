@@ -57,7 +57,7 @@
 %\begin{abstract}
 %\end{abstract}
 
-\begin{tframe}{IMU Dynamics - stationary}
+\begin{tframe}{IMU Dynamics}
 \begin{equation}
 \begin{cases}
 \begin{tabular}{>{$}r<{$} >{$\!\!\!\!\!}l<{$} >{$}r<{$} >{$\!\!\!\!\!}l<{$}}
@@ -77,6 +77,30 @@
 \end{cases}
 \end{equation}
 \end{tframe}
+ 
+\begin{tframe}{Vision Constraints}
+
+\bigskip
+\begin{equation*}
+y(t) \doteq \ba{c}
+y^1 \\ y^2 \\ \vdots \\ y^N \ea (t)
+ = \ba{c}
+\pi(R^T(X^1 - T)) \\
+\pi(R^T(X^2- T)) \\
+\vdots\\
+\pi(R^T( X^N- T))
+\ea
++ \ba{c}
+n^1(t) \\ n^2(t) \\ \vdots \\ n^N(t) \ea 
+\end{equation*}
+
+\bigskip
+Vision constraints correct for IMU biases as long as these biases are constant + noise
+\footnote{Stergios I Roumeliotis, Andrew E Johnson, and James F Montgomery. 
+Augmenting inertial navigation with image-based motion estimation. In \emph{`Robotics
+and Automation, 2002}. Volume 4, pages 4326–4333.}.
+\end{tframe}
+
  
 \begin{tframe}{Bounds on Indistinguishable Set}
 \begin{claim}[Indistinguishable Trajectories from IMU Data]\label{claim-five}
@@ -98,17 +122,23 @@ for some $\epsilon<1$.
 
 \begin{tframe}{Bounds on Indistinguishable Set}
 \begin{claim}[continued]
-Suppose $\gw(t) \doteq \sigma(g_B g(t) g_A)$ for some  constant $g_{A,B} = (R_{A,B}, T_{A,B})$, $\sigma > 0$,
-$\|T_A\|\leq M_A$ and $|\sigma|\leq M_\sigma$.
-Then, with sufficient excitation,
-\begin{gather*}
-\| I - R_A \|  \leq  \frac{2{\epsilon}}{\alert<2>{\m(\dot{\w}\imu\!:\!{\RR^+})}}  \label{constraint1}\\
-|\sigma - 1|  \le \frac{k_{c_1}\epsilon + M_\sigma\|I-R_A\|}{\alert<3>{\M(\dot\alpha\imu\!:\!{\I_{c_1}})}} \label{constraint2}\\
-\|T_A\|\leq \frac{\epsilon(k_{c_2}+(2M_\sigma+1)M_A)}{(1-|\sigma-1|)\,\alert<2>{\m(\ddot\w\imu\!:\!{\I_{c_2}})}}\label{constraint3} \\
-\|(1-R_B^T)\gamma\|\leq\frac{\epsilon(k_{c_3} + M_\sigma M_A) + (|\sigma-1|+\epsilon)\alert<3>{\M(\w\imu-\w_b\!:\!\I_{c_3})}\|\gamma\|}
-{\alert<2>{\m(\w\imu-\w_b\!:\!\I_{c_3})}\,(1-|\sigma-1|)}\label{constraint4}
-\end{gather*}
+Suppose $\gw(t) \doteq \sigma(g_1 g(t) g_1)$ for some  constant $g_i = (R_i, T_i)$, $\sigma > 0$,
+$\|T_1\|\leq M_1$ and $|\sigma|\leq M_\sigma$. Then,
+
+\setlength\extrarowheight{10pt}
+\begin{tabular}{ll}
+$\| I - R_1 \|  \leq  \frac{2{\epsilon}}{\alert<2>{\m(\dot{\w}\imu\,:\,{\RR^+})}},$ &
+$|\sigma - 1|  \le \frac{k_{c_1}\epsilon + M_\sigma\|I-R_1\|}{\alert<3>{\M(\dot\alpha\imu\,:\,{\I_{c_1}})}}$\\
+$\mathrlap{\|T_1\|\leq \frac{\epsilon(k_{c_2}+(2M_\sigma+1)M_1)}{(1-|\sigma-1|)\,\alert<2>{\m(\ddot\w\imu\,:\,{\I_{c_2}})}}}$ \\
+$\mathrlap{\|(1-R_2^T)\gamma\|\leq\frac{\epsilon(k_{c_3} + M_\sigma M_1) + (|\sigma-1|+\epsilon)\alert<3>{\M(\w\imu-\w_b\,:\,\I_{c_3})}\|\gamma\|}
+{\alert<2>{\m(\w\imu-\w_b\,:\,\I_{c_3})}\,(1-|\sigma-1|)}}$
+\end{tabular}
 \end{claim}
 \end{tframe}
 
+\begin{tframe}{Contributions}
+\begin{itemize}
+ \item First bounds on indistinguishable set with IMU bias drift.
+\end{itemize}
+\end{tframe}
 
