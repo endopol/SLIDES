@@ -1,0 +1,62 @@
+\documentclass{beamer}
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+\usetheme[titlepagelogo=logo_ucla_seal, secondlogo=logo_ucla_cw, language=english]{TorinoTh}
+                        
+\usepackage[beamer,customcolors]{hf-tikz}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{array}
+\hfsetfillcolor{alerted text.fg!10}
+\hfsetbordercolor{alerted text.fg}
+
+\author{Josh Hernandez}
+\rel{Stefano Soatto}
+\title{Models and Methods for Sensor-Based
+Environment Exploration}
+\ateneo{University of California, Los Angeles}
+\date{\today}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline for section \thesection}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\begin{document}
+\titlepageframe
+
+\begin{tframe}{Overview}
+How to endow a robot with a ``sense'' of the surrounding environment?
+\begin{description}
+ \item<2->[Localization] To interact with the environment, I need to know where I am, relative to where I have been and what I have seen.
+ \item<3->[Mapping] Once I we know where I am, I need to know the affordances of the things around me.
+ \item<4->[Exploration] Once I know the objects around me, I can expand my region of understanding.
+ \item<5->[Representation] As that region grows, I must compress my understanding to fit my mind.
+\end{description}
+\end{tframe}
+\begin{tframe}{Outline of the Talk}
+\tableofcontents
+\end{tframe}
+\section{Overview}
+\subsection{Observability of Visual-Inertial Navigation}
+\input{observability_slides}
+\subsection{Scene Segmentation by Aggregation of Global Ordering Constraints}
+\input{solobj_slides}
+\subsection{Desiging Agents with Task-Specific Minimal Representation}
+\input{minrep_slides}
+\section{Featured Chapter: Information-Driven Autonomous Exploration}
+\input{exploration_slides}
+
+\begin{tframe}{Thanks}
+\begin{itemize}
+\item Konstantine Tsotsos
+\item Andrea Censi
+\item Vasiliy Karasev
+\item Virginia Estellers
+\end{itemize}
+\end{tframe}
+\end{document}

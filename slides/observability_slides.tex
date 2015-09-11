@@ -1,0 +1,114 @@
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\ba}{\left[ \begin{array}}
+\newcommand{\ea}{\end{array} \right]}
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\bc}{\begin{cases}}
+\newcommand{\ec}{\end{cases}}
+\newcommand{\psfigure}[3]
+        {
+        \begin{tabular}{c}
+        { \psfig{figure=#1,height=#2in,width=#3in}}
+        \end{tabular}   }
+
+\def\real{\mathbb{R}}
+\def\X{{\mathbf{X}}}
+\def\x{{\mathbf{x}}}
+\def\w{\omega}
+\def\hw{{\widehat\w}}
+\def\ww{\tilde\w}
+\def\hww{\widehat\ww}
+
+\newtheorem{defn}{Definition}
+\newtheorem{rem}{Remark}
+\newtheorem{claim}{Claim}
+
+\def\gw{\tilde{g}}
+\def\Xw{\tilde{X}}
+\def\Rw{\tilde{R}}
+\def\Tw{\tilde{T}}
+\def\1{^{\prime}}
+
+\def\g{g}
+\def\inv{^{-1}}
+\def\RR{\mathbb{R}}
+\def\s{\sigma}
+\def\sit{\s_{i}}
+%\def\dot#1{\tfrac{d#1}{dt}}
+\def\dX{\delta X}
+\def\subs{\subset}
+\def\andn{\smallsetminus}
+\def\Mm{\mathcal{M}}
+\def\SO{\operatorname{SO}}
+\def\SE{\operatorname{SE}}
+\def\so{\mathfrak{so}}
+\def\se{\mathfrak{se}}
+\def\Aa{\mathcal{A}}
+\def\ignore#1{}
+\def\imu{_\mathrm{imu}}
+\def\m{{m}}
+\def\M{{M}}
+\def\I{\mathcal{I}}
+
+%\def\cut#1{{ #1}}
+\def\cut#1{{}}
+
+%\begin{abstract}
+%\end{abstract}
+
+\begin{tframe}{IMU Dynamics - stationary}
+\begin{equation}
+\begin{cases}
+\begin{tabular}{>{$}r<{$} >{$\!\!\!\!\!}l<{$} >{$}r<{$} >{$\!\!\!\!\!}l<{$}}
+\dot T &= V & T(0) &= 0 \\
+\dot R &= R \widehat \w & R(0) &= R_0\\
+\dot V &= \alpha \\ %~~~~~~ V(0) = V_0 \\
+\dot \w &= w\\ % ~~~~~~~ \w(0) = \w_0 \\
+\dot \alpha &= \xi \\% ~~~~~~ \alpha(0) = \alpha_0 \\
+\dot \w_b &= n_{\w_b}  \\
+\dot \alpha_b &= n_{\alpha_b}  \\ 
+\dot \gamma &= 0 \\
+\end{tabular}\\
+\begin{tabular}{>{$}r<{$} >{$\!\!\!\!\!}l<{$}}
+\w\imu (t) &= \w(t) + \alert<2>{\w_b(t)} + n_{\w}(t) \\ 
+\alpha\imu (t) &= R^T(t) (\alpha(t)- \gamma) + \alert<2>{\alpha_b(t)} + n_{\alpha}(t) 
+\end{tabular}
+\end{cases}
+\end{equation}
+\end{tframe}
+ 
+\begin{tframe}{Bounds on Indistinguishable Set}
+\begin{claim}[Indistinguishable Trajectories from IMU Data]\label{claim-five}
+Let $g(t)= (R(t), T(t)) \in \SE(3)$ be such that
+\begin{equation}
+\begin{cases}
+\begin{tabular}{>{$}r<{$} >{$\!\!\!\!\!}l<{$}}
+\dot R &= R(\hw\imu  - \hw_b) \\
+\dot T &= V \\
+\dot V &= R(\alpha\imu  - \alpha_b) + \gamma
+\end{tabular}
+\end{cases}
+\label{eq-model-dyn}
+\end{equation}
+for some known constant $\gamma$ and functions $\alpha\imu (t)$, $\w\imu (t)$ and for some unknown functions $\alpha_b(t), \w_b(t)$ that are constrained to have $\| \dot \alpha_b(t) \| \le \epsilon$, $\| \dot \w_b(t) \| \le \epsilon$, and $\|\ddot\w_b(t)\|\le\epsilon$ at all $t$,
+for some $\epsilon<1$.
+\end{claim}
+\end{tframe}
+
+\begin{tframe}{Bounds on Indistinguishable Set}
+\begin{claim}[continued]
+Suppose $\gw(t) \doteq \sigma(g_B g(t) g_A)$ for some  constant $g_{A,B} = (R_{A,B}, T_{A,B})$, $\sigma > 0$,
+$\|T_A\|\leq M_A$ and $|\sigma|\leq M_\sigma$.
+Then, with sufficient excitation,
+\begin{gather*}
+\| I - R_A \|  \leq  \frac{2{\epsilon}}{\alert<2>{\m(\dot{\w}\imu\!:\!{\RR^+})}}  \label{constraint1}\\
+|\sigma - 1|  \le \frac{k_{c_1}\epsilon + M_\sigma\|I-R_A\|}{\alert<3>{\M(\dot\alpha\imu\!:\!{\I_{c_1}})}} \label{constraint2}\\
+\|T_A\|\leq \frac{\epsilon(k_{c_2}+(2M_\sigma+1)M_A)}{(1-|\sigma-1|)\,\alert<2>{\m(\ddot\w\imu\!:\!{\I_{c_2}})}}\label{constraint3} \\
+\|(1-R_B^T)\gamma\|\leq\frac{\epsilon(k_{c_3} + M_\sigma M_A) + (|\sigma-1|+\epsilon)\alert<3>{\M(\w\imu-\w_b\!:\!\I_{c_3})}\|\gamma\|}
+{\alert<2>{\m(\w\imu-\w_b\!:\!\I_{c_3})}\,(1-|\sigma-1|)}\label{constraint4}
+\end{gather*}
+\end{claim}
+\end{tframe}
+
+
